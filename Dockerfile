@@ -6,13 +6,13 @@ MAINTAINER Alessandro Tanasi <alessandro@tanasi.it>
 RUN apt-get update
 
 # Upgrade and install deps.
-RUN set -x \ 
+RUN set -x \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y munin cron nginx spawn-fcgi libcgi-fast-perl \
     && apt clean && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure as cgi and disable localhost monitoring.
-RUN set -x \ 
+RUN set -x \
     && sed -i 's/^#graph_strategy cron/graph_strategy cgi/g' /etc/munin/munin.conf \
     && sed -i 's/^#html_strategy cron/html_strategy cgi/g' /etc/munin/munin.conf \
     && sed -i 's/^\[localhost\.localdomain\]/#\[localhost\.localdomain\]/g' /etc/munin/munin.conf \
