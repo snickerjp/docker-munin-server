@@ -7,7 +7,7 @@ RUN apt-get update
 
 # Upgrade and install deps.
 RUN set -x \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y munin cron nginx spawn-fcgi libcgi-fast-perl \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends munin cron nginx spawn-fcgi libcgi-fast-perl \
     && apt clean && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
