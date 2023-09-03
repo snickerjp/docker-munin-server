@@ -2,11 +2,9 @@ FROM ubuntu:22.04
 
 MAINTAINER Alessandro Tanasi <alessandro@tanasi.it>
 
-# Update.
-RUN apt-get update
-
 # Upgrade and install deps.
 RUN set -x \
+    && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends munin cron nginx spawn-fcgi libcgi-fast-perl \
     && apt clean && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
